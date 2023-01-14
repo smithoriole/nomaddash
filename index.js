@@ -35,7 +35,7 @@ function getDCF() {
         .then(res => res.json())
         .then(data => {
             dcfRevenue = data.lamports /1000000000
-            dcfPayout = dcfRevenue / 20000
+            dcfPayout = (dcfRevenue * 0.587) / 20000
             dcfCat = dcfPayout * localStorage.getItem("catsOwned")
 
             dcfRevenueHTML.textContent = `${dcfRevenue.toFixed(2)} Sol`
@@ -53,7 +53,7 @@ function getDCD() {
                 .then(res2 => res2.json())
                 .then(data2 => {
                     dcdRevenue = (data.lamports / 1000000000) + (data2.lamports / 1000000000)
-                    dcdPayout = (dcdRevenue * 0.7517) / 20000
+                    dcdPayout = (dcdRevenue * 0.587) / 20000
                     dcdCat = dcdPayout * localStorage.getItem("catsOwned")
 
                     dcdRevenueHTML.textContent = `${dcdRevenue.toFixed(2)} Sol`
@@ -69,7 +69,7 @@ function getDCD() {
         .then(res => res.json())
         .then(data => {
             dcdRevenue = (data.lamports / 1000000000)
-            dcdPayout = (dcdRevenue * 0.7517) / 20000
+            dcdPayout = (dcdRevenue * 0.587) / 20000
             dcdCat = dcdPayout * localStorage.getItem("catsOwned")
 
             dcdRevenueHTML.textContent = `${dcdRevenue.toFixed(2)} Sol`
