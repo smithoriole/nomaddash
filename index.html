@@ -1,1 +1,133 @@
 
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="index.css">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Golden Nomad's Dashboard</title>
+        <link rel="icon" href="icon.ico">
+    </head>
+
+        <nav>
+            <h1>Golden Nomad's Dashboar<span class="hover">d</span></h1>
+            <p class="smallText">Data updates every 10s (Total has a 1.5s delay)</p>
+        </nav>
+
+        <section>
+
+            <header>
+                <p><a href="https://degencoinflip.com/goldennomads" target="_blank">Click to play</a></p>
+                <p>Kind Donation: <a>nomadubfhEHBAxe4fDFgt4x2Ur1UxraeWsTgMXxhTet</a></p>
+            </header>
+
+            <div id="catsOwnedDiv">
+                <label for="catsOwned">Amount of Cats owned: </label>
+                <input type="number" name="catsOwned" id="catsOwned">
+            </div>
+
+            <div id="calculations">
+
+                <div id="total" class="calculation">
+                    <h2>TOTAL Payouts</h2>
+                    <div class="stats">
+                        <div class="stat">
+                            <p>Sol in Fee Wallet: </p>
+                            <p id="totalRevenue">0.00 Sol</p>
+                        </div>
+                        <div class="stat">
+                            <p>Payout per cat: </p>
+                            <p id="totalPayout">0.00 Sol</p>
+                        </div>
+                        <div class="stat">
+                            <p>TOTAL Payout Cats Owned: </p>
+                            <p id="totalCat" class="underline">0.00 Sol</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="dcf" class="calculation">
+                    <h2>Coin Flip Payouts</h2>
+                    <div class="stats">
+                        <div class="stat">
+                            <p>Sol in Fee Wallet: </p>
+                            <p id="dcfRevenue">0.00 Sol</p>
+                        </div>
+                        <div class="stat">
+                            <p>Payout per cat: </p>
+                            <p id="dcfPayout">0.00 Sol</p>
+                        </div>
+                        <div class="stat">
+                            <p>TOTAL Payout Cats Owned: </p>
+                            <p id="dcfCat" class="underline">0.00 Sol</p>
+                        </div>
+                    </div>
+                </div>
+        
+                <div id="dcd" class="calculation">
+                    <h2>Dozer Payouts</h2>
+                    <div class="stats">
+                        <div class="stat">
+                            <p>Sol in Fee Wallet: </p>
+                            <p id="dcdRevenue">0.00 Sol</p>
+                        </div>
+                        <div class="stat">
+                            <p>Payout per cat: </p>
+                            <p id="dcdPayout">0.00 Sol</p>
+                        </div>
+                        <div class="stat">
+                            <p>TOTAL Payout Cats Owned: </p>
+                            <p id="dcdCat" class="underline">0.00 Sol</p>  
+                        </div>                
+                    </div>
+                </div>
+
+                <div id="right">
+                    <div id="leaderboardDiv" class="calculation">
+                        <h1>Nomad Leaderboard</h1>
+                        <div class="leaderboardButtons">
+                            <button id="topGains" class="active">Top Gains</button>
+                            <button id="topVolume">Volume</button>
+                            <button id="topFlips">Flips</button>
+                            <button id="topWinStreak">Win Streak</button>
+                        </div>
+                        <div id="leaderboard">
+            
+                        </div>
+                    </div>
+                    <d id="jackpotDiv" class="calculation">
+                        <div class="jackpotTotal">
+                            <h2>Jackpot total:</h2>
+                            <div class="jackpot">
+                                <h2>00.00 Sol</h2>
+                            </div>
+                        </div>
+                        <div class="jackpotInfo">
+                            <p style="text-decoration: underline;">How does the Jackpot work?</p>
+                            <p>The Jackpot pays winner on a 15-win streak and continues to grow until a winner is found.</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div id="floor">
+                <p>Your total cat value is <u>0.00 Sol</u> at <u>0.00 Sol</u> per cat</p>
+            </div>
+
+            <div id="eligibleDiv">
+                <div id="eligibleForm">
+                    <label for="eligible">Nomad whitelabel eligiblity: </label>
+                    <input type="text" name="eligible" id="eligible" minlength="32" maxLength="44">
+                    <button id="eligibleBtn">CHECK</button>
+                </div>
+                <div id="eligibleConfirmation"></div>
+            </div>
+
+        </section>
+
+        <script src="index.js" type="module"></script>
+    </body>
+</html>
