@@ -89,7 +89,7 @@ function getTOTAL() {
 }
 
 function getFLOOR() {
-    fetch("https://cors-get-proxy.sirjosh.workers.dev/?url=https://api-mainnet.magiceden.io/rpc/getCollectionEscrowStats/degenfatcats?edge_cache=true", {
+    fetch("https://www.dcfdash.com/api/floor", {
         method: 'GET',
         redirect: 'follow',
     })
