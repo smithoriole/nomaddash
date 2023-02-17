@@ -31,7 +31,7 @@ let eligibleBtn = document.getElementById("eligibleBtn")
 let eligibleConfirmation = document.getElementById("eligibleConfirmation")
 
 function getDCF() {
-    fetch("https://api.helius.xyz/v0/addresses/h2oMkkgUF55mxMFeuUgVYwvEnpV5kRbvHVuDWMKDYFC/balances?api-key=5861fadf-e338-4249-927b-90d3b1a2223f")
+    fetch("https://api.helius.xyz/v0/addresses/h2oMkkgUF55mxMFeuUgVYwvEnpV5kRbvHVuDWMKDYFC/balances?api-key=e1c09956-d571-42f5-bcf7-b71c2acb2497")
         .then(res => res.json())
         .then(data => {
             dcfRevenue = data.nativeBalance /1000000000
