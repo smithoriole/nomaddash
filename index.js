@@ -31,7 +31,7 @@ let eligibleBtn = document.getElementById("eligibleBtn")
 let eligibleConfirmation = document.getElementById("eligibleConfirmation")
 
 function getDCF() {
-    fetch("https://api.helius.xyz/v0/addresses/h2oMkkgUF55mxMFeuUgVYwvEnpV5kRbvHVuDWMKDYFC/balances?api-key=<5861fadf-e338-4249-927b-90d3b1a2223f>")
+    fetch("https://api.helius.xyz/v0/addresses/h2oMkkgUF55mxMFeuUgVYwvEnpV5kRbvHVuDWMKDYFC/balances?api-key=5861fadf-e338-4249-927b-90d3b1a2223f")
         .then(res => res.json())
         .then(data => {
             dcfRevenue = data.lamports /1000000000
@@ -46,10 +46,10 @@ function getDCF() {
 
 /*
 function getDCD() {
-    fetch("https://api.helius.xyz/v0/addresses/3biJV4VbV6zJSV8mqUzx76YM8bgMeB5PtuFv6PQHzP1d/balances?api-key=<5861fadf-e338-4249-927b-90d3b1a2223f>")
+    fetch("https://api.helius.xyz/v0/addresses/3biJV4VbV6zJSV8mqUzx76YM8bgMeB5PtuFv6PQHzP1d/balances?api-key=5861fadf-e338-4249-927b-90d3b1a2223f")
         .then(res => res.json())
         .then(data => {
-            fetch("https://api.helius.xyz/v0/addresses/Fii9oCjWSKty9yM8VJdd8D2o2zX5MTHkEop3rVyEFc4J/balances?api-key=<5861fadf-e338-4249-927b-90d3b1a2223f>")
+            fetch("https://api.helius.xyz/v0/addresses/Fii9oCjWSKty9yM8VJdd8D2o2zX5MTHkEop3rVyEFc4J/balances?api-key=5861fadf-e338-4249-927b-90d3b1a2223f")
                 .then(res2 => res2.json())
                 .then(data2 => {
                     dcdRevenue = (data.lamports / 1000000000) + (data2.lamports / 1000000000)
@@ -65,7 +65,7 @@ function getDCD() {
 */
 
 function getDCD() {
-    fetch("https://api.helius.xyz/v0/addresses/BXb2Bh17kzkZpKf3yiKspYSrstJxbcjXsyt6mtexDPqa/balances?api-key=<5861fadf-e338-4249-927b-90d3b1a2223f>")
+    fetch("https://api.helius.xyz/v0/addresses/BXb2Bh17kzkZpKf3yiKspYSrstJxbcjXsyt6mtexDPqa/balances?api-key=5861fadf-e338-4249-927b-90d3b1a2223f")
         .then(res => res.json())
         .then(data => {
             dcdRevenue = (data.lamports / 1000000000)
@@ -120,7 +120,7 @@ function jackpot() {
                 totalVolume += item.total
                 jackpot = ((totalVolume * 0.035) * 0.2428) * 0.05
             }
-            fetch(`https://api.helius.xyz/v0/addresses/jpotSBs8opQ4xGDn2xbRQS4eChNG5w4kxEeS1Rx9tyg/balances?api-key=<5861fadf-e338-4249-927b-90d3b1a2223f>`)
+            fetch(`https://api.helius.xyz/v0/addresses/jpotSBs8opQ4xGDn2xbRQS4eChNG5w4kxEeS1Rx9tyg/balances?api-key=5861fadf-e338-4249-927b-90d3b1a2223f`)
                 .then(res2 => res2.json())
                 .then(data2 => {
                     jackpotTotal = jackpot + (data2.lamports / 1000000000)
