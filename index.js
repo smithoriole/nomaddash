@@ -34,7 +34,7 @@ function getDCF() {
     fetch("https://api.helius.xyz/v0/addresses/h2oMkkgUF55mxMFeuUgVYwvEnpV5kRbvHVuDWMKDYFC/balances?api-key=5861fadf-e338-4249-927b-90d3b1a2223f")
         .then(res => res.json())
         .then(data => {
-            dcfRevenue = data.lamports /1000000000
+            dcfRevenue = data.nativeBalance /1000000000
             dcfPayout = (dcfRevenue * 0.587) / 20000
             dcfCat = dcfPayout * localStorage.getItem("catsOwned")
 
@@ -68,7 +68,7 @@ function getDCD() {
     fetch("https://api.helius.xyz/v0/addresses/BXb2Bh17kzkZpKf3yiKspYSrstJxbcjXsyt6mtexDPqa/balances?api-key=5861fadf-e338-4249-927b-90d3b1a2223f")
         .then(res => res.json())
         .then(data => {
-            dcdRevenue = (data.lamports / 1000000000)
+            dcdRevenue = (data.nativeBalance / 1000000000)
             dcdPayout = (dcdRevenue * 0.587) / 20000
             dcdCat = dcdPayout * localStorage.getItem("catsOwned")
 
@@ -95,7 +95,7 @@ function getFLOOR() {
     })
         .then(res => res.json())
         .then(data => {
-            floorPrice = data.results.floorPrice / 1000000000
+            floorPrice = data.floorPrice / 1000000000
             totalFloorPrice = floorPrice * localStorage.getItem("catsOwned")
             floor.innerHTML = `<p>Your total cat value is <u>${totalFloorPrice.toFixed(2)} Sol</u> at <u>${floorPrice.toFixed(2)} Sol</u> per cat</p>`
         })
@@ -123,8 +123,8 @@ function jackpot() {
             fetch(`https://api.helius.xyz/v0/addresses/jpotSBs8opQ4xGDn2xbRQS4eChNG5w4kxEeS1Rx9tyg/balances?api-key=5861fadf-e338-4249-927b-90d3b1a2223f`)
                 .then(res2 => res2.json())
                 .then(data2 => {
-                    jackpotTotal = jackpot + (data2.lamports / 1000000000)
-                    let NEWJACKPOT = (data2.lamports / 1000000000)
+                    jackpotTotal = jackpot + (data2.nativeBalance / 1000000000)
+                    let NEWJACKPOT = (data2.nativeBalance / 1000000000)
 
                     document.querySelector(".jackpot").innerHTML = `
                         <h2>${NEWJACKPOT.toFixed(2)} Sol</h2>
