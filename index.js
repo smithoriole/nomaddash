@@ -88,18 +88,21 @@ function getTOTAL() {
     totalCatHTML.textContent = `${totalCat.toFixed(2)} Sol`
 }
 
-// function getFLOOR() {
-//    fetch("https://www.dcfdash.com/api/floor", {
-//        method: 'GET',
-//        redirect: 'follow',
-//    })
-//        .then(res => res.json())
-//        .then(data => {
+function getFLOOR() {
+    fetch("https://sharky.fi/api/floor-prices", {
+        method: 'GET',
+        redirect: 'follow',
+    })
+        .then(res => res.json())
+        .then(data => {
+            const degenFatCats = data.find(item => item.name === "Degen Fat Cats");
+            const floorPriceSol = degenFatCats.floorPriceSol;
 //            floorPrice = data.floorPrice / 1000000000
-//            totalFloorPrice = floorPrice * localStorage.getItem("catsOwned")
-//            floor.innerHTML = `<p>Your total cat value is <u>${totalFloorPrice.toFixed(2)} Sol</u> at <u>${floorPrice.toFixed(2)} Sol</u> per cat</p>`
-//       })
-//}
+            floorPrice = floorPriceSol
+            totalFloorPrice = floorPrice * localStorage.getItem("catsOwned")
+            floor.innerHTML = `<p>Your total cat value is <u>${totalFloorPrice.toFixed(2)} Sol</u> at <u>${floorPrice.toFixed(2)} Sol</u> per cat</p>`
+        })
+}
 
 function jackpot() {
     let totalVolume = 0
