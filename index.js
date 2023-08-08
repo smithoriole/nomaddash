@@ -65,7 +65,7 @@ function getDCD() {
 */
 
 function getDCD() {
-    fetch("https://api.helius.xyz/v0/addresses/BXb2Bh17kzkZpKf3yiKspYSrstJxbcjXsyt6mtexDPqa/balances?api-key=e1c09956-d571-42f5-bcf7-b71c2acb2497")
+    fetch("https://api.helius.xyz/v0/addresses/DbS2HRdTovF1VQjHxPXYMmp9Kov7V7e2MkQYGWe7xXW3/balances?api-key=e1c09956-d571-42f5-bcf7-b71c2acb2497")
         .then(res => res.json())
         .then(data => {
             dcdRevenue = (data.nativeBalance / 1000000000)
