@@ -5,7 +5,7 @@ const { promisify } = require('util');
 require('dotenv').config();
 
 const app = express();
-const port = process.env.PORT || 10000; // Ensure you're using the correct port
+const port = process.env.PORT || 10000; // Ensure the port is set correctly
 
 // Use the REDIS_URL environment variable for Redis connection
 const redisUrl = process.env.REDIS_URL || 'redis://localhost:6379';
