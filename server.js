@@ -2,23 +2,18 @@ const express = require('express');
 const axios = require('axios');
 const redis = require('redis');
 const { promisify } = require('util');
+require('dotenv').config();
 
 const app = express();
 const port = process.env.PORT || 3000;
 
-// Setup Redis client
-const redisHost = process.env.REDIS_HOST || 'localhost';
-const redisPort = process.env.REDIS_PORT || 6379;
-const redisPassword = process.env.REDIS_PASSWORD || '';
-const client = redis.createClient({
-    host: redisHost,
-    port: redisPort,
-    password: redisPassword
-});
+// Use the REDIS_URL environment variable for Redis connection
+const redisUrl = process.env.REDIS_URL || 'redis://localhost:6379';
+const client = redis.createClient(redisUrl);
 const getAsync = promisify(client.get).bind(client);
 
-// API Key and URL
-const API_KEY = process.env.API_KEY || '51a10f91-34a9-4ead-9c1f-3afe2a906208';
+// API Key and Base URL
+const API_KEY = process.env.API_KEY || 'eff3cc4b-32f2-47d0-b6a0-ae82a5ba3159';
 const BASE_URL = 'https://api.helius.xyz/v0/addresses/';
 
 // Fetch balances function
@@ -114,6 +109,4 @@ app.get('/dcf', cache, async (req, res) => {
     }
 });
 
-app.listen(port, () => {
-    console.log(`Server running at http://localhost:${port}`);
-});
+app.listen(port, (
