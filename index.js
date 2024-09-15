@@ -1,16 +1,4 @@
-let dcfRevenue
-let dcfPayout
-let dcfCat
-let dcfRevenueHTML = document.getElementById("dcfRevenue")
-let dcfPayoutHTML = document.getElementById("dcfPayout")
-let dcfCatHTML = document.getElementById("dcfCat")
 
-let dcdRevenue
-let dcdPayout
-let dcdCat
-let dcdRevenueHTML = document.getElementById("dcdRevenue")
-let dcdPayoutHTML = document.getElementById("dcdPayout")
-let dcdCatHTML = document.getElementById("dcdCat")
 
 let dccRevenue
 let dccPayout
@@ -19,19 +7,6 @@ let dccRevenueHTML = document.getElementById("dccRevenue")
 let dccPayoutHTML = document.getElementById("dccPayout")
 let dccCatHTML = document.getElementById("dccCat")
 
-let dsRevenue
-let dsPayout
-let dsCat
-let dsRevenueHTML = document.getElementById("dsRevenue")
-let dsPayoutHTML = document.getElementById("dsPayout")
-let dsCatHTML = document.getElementById("dsCat")
-
-let insuranceRevenue
-let insurancePayout
-let insuranceCat
-let insuranceRevenueHTML = document.getElementById("insuranceRevenue")
-let insurancePayoutHTML = document.getElementById("insurancePayout")
-let insuranceCatHTML = document.getElementById("insuranceCat")
 
 let totalRevenue
 let totalPayout
