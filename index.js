@@ -73,7 +73,7 @@ function reset(){
   }
 
 function getDCF() {
-    fetch("http://localhost:3000/dcf")
+    fetch("http://localhost:10000/dcf")
         .then(res => res.json())
         .then(data => {
             dcfRevenueHTML.textContent = `${data.revenue.toFixed(4)} Sol`;
@@ -102,7 +102,7 @@ function getDCF() {
 }*/
 
 function getDCC() {
-    fetch("http://localhost:3000/dcc")
+    fetch("http://localhost:10000/dcc")
         .then(res => res.json())
         .then(data => {
             dccRevenueHTML.textContent = `${data.revenue.toFixed(4)} Sol`;
@@ -112,7 +112,7 @@ function getDCC() {
 }
 
 function getDS() {
-    fetch("http://localhost:3000/ds")
+    fetch("http://localhost:10000/ds")
         .then(res => res.json())
         .then(data => {
             dsRevenueHTML.textContent = `${data.revenue.toFixed(4)} Sol`;
@@ -122,7 +122,7 @@ function getDS() {
 }
 
 function getinsurance() {
-    fetch("http://localhost:3000/insurance")
+    fetch("http://localhost:10000/insurance")
         .then(res => res.json())
         .then(data => {
             insuranceRevenueHTML.textContent = `${data.revenue.toFixed(4)} Sol`;
