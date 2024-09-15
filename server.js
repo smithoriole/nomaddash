@@ -51,6 +51,20 @@ function calculateValues(data1, data2, coefficient, payoutFactor) {
 
 // Routes
 
+app.get('/dcf', cache, async (req, res) => {
+    try {
+        const [balance1, balance2] = await Promise.all([
+            fetchBalances('h2oMkkgUF55mxMFeuUgVYwvEnpV5kRbvHVuDWMKDYFC'),
+            fetchBalances('dcfik2oUsdjDYmYbKxAKLWAnGXDS7gMmATA22EfRDqN')
+        ]);
+
+        const values = calculateValues(balance1, balance2, 0.595, 0.6);
+        res.json(values);
+    } catch (error) {
+        res.status(500).send('Error fetching DCF balances');
+    }
+});
+
 app.get('/dcc', cache, async (req, res) => {
     try {
         const [balance1, balance2] = await Promise.all([
@@ -96,3 +110,5 @@ app.get('/insurance', cache, async (req, res) => {
 app.listen(port, () => {
     console.log(`Server running at http://localhost:${port}`);
 });
+
+
