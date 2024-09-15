@@ -4,14 +4,21 @@ const redis = require('redis');
 const { promisify } = require('util');
 
 const app = express();
-const port = 3000;
+const port = process.env.PORT || 3000;
 
 // Setup Redis client
-const client = redis.createClient();
+const redisHost = process.env.REDIS_HOST || 'localhost';
+const redisPort = process.env.REDIS_PORT || 6379;
+const redisPassword = process.env.REDIS_PASSWORD || '';
+const client = redis.createClient({
+    host: redisHost,
+    port: redisPort,
+    password: redisPassword
+});
 const getAsync = promisify(client.get).bind(client);
 
 // API Key and URL
-const API_KEY = 'eff3cc4b-32f2-47d0-b6a0-ae82a5ba3159';
+const API_KEY = process.env.API_KEY || 'eff3cc4b-32f2-47d0-b6a0-ae82a5ba3159';
 const BASE_URL = 'https://api.helius.xyz/v0/addresses/';
 
 // Fetch balances function
@@ -50,20 +57,6 @@ function calculateValues(data1, data2, coefficient, payoutFactor) {
 }
 
 // Routes
-
-app.get('/dcf', cache, async (req, res) => {
-    try {
-        const [balance1, balance2] = await Promise.all([
-            fetchBalances('h2oMkkgUF55mxMFeuUgVYwvEnpV5kRbvHVuDWMKDYFC'),
-            fetchBalances('dcfik2oUsdjDYmYbKxAKLWAnGXDS7gMmATA22EfRDqN')
-        ]);
-
-        const values = calculateValues(balance1, balance2, 0.595, 0.6);
-        res.json(values);
-    } catch (error) {
-        res.status(500).send('Error fetching DCF balances');
-    }
-});
 
 app.get('/dcc', cache, async (req, res) => {
     try {
@@ -107,8 +100,20 @@ app.get('/insurance', cache, async (req, res) => {
     }
 });
 
+app.get('/dcf', cache, async (req, res) => {
+    try {
+        const [balance1, balance2] = await Promise.all([
+            fetchBalances('h2oMkkgUF55mxMFeuUgVYwvEnpV5kRbvHVuDWMKDYFC'),
+            fetchBalances('dcfik2oUsdjDYmYbKxAKLWAnGXDS7gMmATA22EfRDqN')
+        ]);
+
+        const values = calculateValues(balance1, balance2, 0.595, 0.6);
+        res.json(values);
+    } catch (error) {
+        res.status(500).send('Error fetching DCF balances');
+    }
+});
+
 app.listen(port, () => {
     console.log(`Server running at http://localhost:${port}`);
 });
-
-
