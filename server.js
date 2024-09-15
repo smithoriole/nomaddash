@@ -18,8 +18,15 @@ const BASE_URL = 'https://api.helius.xyz/v0/addresses/';
 
 // Fetch balances function
 async function fetchBalances(address) {
-    const response = await axios.get(`${BASE_URL}${address}/balances?api-key=${API_KEY}`);
-    return response.data.nativeBalance;
+    try {
+        const response = await axios.get(`${BASE_URL}${address}/balances?api-key=${API_KEY}`);
+        const balance = response.data.nativeBalance;
+        console.log(`Fetched balance for address ${address}: ${balance}`);
+        return balance;
+    } catch (error) {
+        console.error(`Error fetching balance for address ${address}:`, error);
+        throw error;
+    }
 }
 
 // Cache middleware
@@ -28,9 +35,11 @@ async function cache(req, res, next) {
     const cachedData = await getAsync(cacheKey);
 
     if (cachedData) {
+        console.log(`Cache hit for ${cacheKey}`);
         return res.json(JSON.parse(cachedData));
     }
 
+    console.log(`Cache miss for ${cacheKey}`);
     res.sendResponse = res.json;
     res.json = (body) => {
         client.setex(cacheKey, 60, JSON.stringify(body)); // Cache for 60 seconds
@@ -48,8 +57,10 @@ app.get('/dcc', cache, async (req, res) => {
             fetchBalances('BrrrnDGpGURbekEJRNsN8k5qxbUyYsBTVnXPMupbMmjW')
         ]);
 
+        console.log(`DCC balances fetched: balance1=${balance1}, balance2=${balance2}`);
         res.json({ balance1, balance2 });
     } catch (error) {
+        console.error('Error fetching DCC balances:', error);
         res.status(500).send('Error fetching DCC balances');
     }
 });
@@ -61,8 +72,10 @@ app.get('/ds', cache, async (req, res) => {
             fetchBalances('dsHJ7jpqSaDPAkLyvefuWScBDEvQ6MPyzectajaNWA9')
         ]);
 
+        console.log(`DS balances fetched: balance1=${balance1}, balance2=${balance2}`);
         res.json({ balance1, balance2 });
     } catch (error) {
+        console.error('Error fetching DS balances:', error);
         res.status(500).send('Error fetching DS balances');
     }
 });
@@ -70,8 +83,10 @@ app.get('/ds', cache, async (req, res) => {
 app.get('/insurance', cache, async (req, res) => {
     try {
         const balance = await fetchBalances('DCFSBGZFygDwMMpyCP1BHbstiYwHF7yuQ8yLfxcqDe2Y');
+        console.log(`Insurance balance fetched: ${balance}`);
         res.json({ balance });
     } catch (error) {
+        console.error('Error fetching insurance balance:', error);
         res.status(500).send('Error fetching insurance balance');
     }
 });
@@ -83,8 +98,10 @@ app.get('/dcf', cache, async (req, res) => {
             fetchBalances('dcfik2oUsdjDYmYbKxAKLWAnGXDS7gMmATA22EfRDqN')
         ]);
 
+        console.log(`DCF balances fetched: balance1=${balance1}, balance2=${balance2}`);
         res.json({ balance1, balance2 });
     } catch (error) {
+        console.error('Error fetching DCF balances:', error);
         res.status(500).send('Error fetching DCF balances');
     }
 });
