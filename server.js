@@ -40,17 +40,6 @@ async function cache(req, res, next) {
     next();
 }
 
-// Helper function to calculate values
-function calculateValues(data1, data2, coefficient, payoutFactor) {
-    const revenue = (((data1 / 1000000000) + (data2 / 1000000000)) * coefficient);
-    const payout = (revenue * payoutFactor) / 20000;
-    return {
-        revenue,
-        payout,
-        cat: payout * localStorage.getItem("catsOwned")
-    };
-}
-
 // Routes
 app.get('/dcc', cache, async (req, res) => {
     try {
@@ -59,8 +48,7 @@ app.get('/dcc', cache, async (req, res) => {
             fetchBalances('BrrrnDGpGURbekEJRNsN8k5qxbUyYsBTVnXPMupbMmjW')
         ]);
 
-        const values = calculateValues(balance1, balance2, 0.7, 0.44);
-        res.json(values);
+        res.json({ balance1, balance2 });
     } catch (error) {
         res.status(500).send('Error fetching DCC balances');
     }
@@ -73,8 +61,7 @@ app.get('/ds', cache, async (req, res) => {
             fetchBalances('dsHJ7jpqSaDPAkLyvefuWScBDEvQ6MPyzectajaNWA9')
         ]);
 
-        const values = calculateValues(balance1, balance2, 0.7, 0.25);
-        res.json(values);
+        res.json({ balance1, balance2 });
     } catch (error) {
         res.status(500).send('Error fetching DS balances');
     }
@@ -83,14 +70,9 @@ app.get('/ds', cache, async (req, res) => {
 app.get('/insurance', cache, async (req, res) => {
     try {
         const balance = await fetchBalances('DCFSBGZFygDwMMpyCP1BHbstiYwHF7yuQ8yLfxcqDe2Y');
-
-        const revenue = (balance / 1000000000 * 0.7);
-        const payout = (revenue * 0.25) / 20000;
-        const cat = payout * localStorage.getItem("catsOwned");
-
-        res.json({ revenue, payout, cat });
+        res.json({ balance });
     } catch (error) {
-        res.status(500).send('Error fetching insurance balances');
+        res.status(500).send('Error fetching insurance balance');
     }
 });
 
@@ -101,8 +83,7 @@ app.get('/dcf', cache, async (req, res) => {
             fetchBalances('dcfik2oUsdjDYmYbKxAKLWAnGXDS7gMmATA22EfRDqN')
         ]);
 
-        const values = calculateValues(balance1, balance2, 0.595, 0.6);
-        res.json(values);
+        res.json({ balance1, balance2 });
     } catch (error) {
         res.status(500).send('Error fetching DCF balances');
     }
