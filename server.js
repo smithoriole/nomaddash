@@ -12,8 +12,8 @@ const redisUrl = process.env.REDIS_URL || 'redis://localhost:6379';
 const client = redis.createClient(redisUrl);
 const getAsync = promisify(client.get).bind(client);
 
-// API Key and Base URL
-const API_KEY = process.env.API_KEY || 'eff3cc4b-32f2-47d0-b6a0-ae82a5ba3159';
+// New API Key and Base URL
+const API_KEY = '51a10f91-34a9-4ead-9c1f-3afe2a906208';
 const BASE_URL = 'https://api.helius.xyz/v0/addresses/';
 
 // Fetch balances function
@@ -109,4 +109,11 @@ app.get('/dcf', cache, async (req, res) => {
     }
 });
 
-app.listen(port, (
+app.listen(port, () => {
+    console.log(`Server running at http://localhost:${port}`);
+});
+
+// Clean up Redis client on exit
+process.on('SIGINT', () => {
+    client.quit();
+});
