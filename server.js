@@ -5,7 +5,7 @@ const { promisify } = require('util');
 require('dotenv').config();
 
 const app = express();
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 10000; // Ensure you're using the correct port
 
 // Use the REDIS_URL environment variable for Redis connection
 const redisUrl = process.env.REDIS_URL || 'redis://localhost:6379';
@@ -39,14 +39,9 @@ app.use((req, res, next) => {
 });
 
 // Test Route
-app.get('/test', async (req, res) => {
-    try {
-        console.log('Testing route...');
-        res.send('Test route is working');
-    } catch (error) {
-        console.error('Error in test route:', error.message);
-        res.status(500).send('Error in test route');
-    }
+app.get('/test', (req, res) => {
+    console.log('Test route accessed');
+    res.send('Test route is working');
 });
 
 // DCC Route
