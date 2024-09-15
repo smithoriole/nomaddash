@@ -1,0 +1,208 @@
+
+<!DOCTYPE html>
+<html>
+     <link rel="shortcut icon" href="assets/images/favicon.png" type="image/png">
+    <link rel="apple-touch-icon" href="assets/images/gndicon.png">
+<!-- Mirrored from goldennomaddash.netlify.app/ by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 07 Aug 2023 12:49:34 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<body>
+    <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com/">
+        <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&amp;display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="index.css">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Golden Nomad's Dashboard</title>
+        <link rel="shortcut icon" href="assets/images/favicon.png" type="image/png">
+        <link rel="apple-touch-icon" href="assets/images/gndicon.png">
+    </head>
+    <div id="testing">
+        <nav>
+            <div>
+                <h1>Golden Nomad's Dashboard</h1>  
+                <p>Kind Donation: <a>nomadubfhEHBAxe4fDFgt4x2Ur1UxraeWsTgMXxhTet</a></p>   
+            </div> 
+        </nav>
+
+            <div onclick="location.href='https://goldennomads.io/'" style="cursor: pointer;" id="testlang">
+                <!-- <img src="jackpot.png"alt="jackpot"> -->
+                
+                    <p id="solvalues2" class="minijpot">0.00◎</p>           
+                    <p id="solvalues1" class="dcfjpot">0.00◎</p>
+                    <p id="solvalues1" class="dozerjpot">0.00◎</p>
+                    <p id="solvalues2" class="charity">0.00◎</p>
+                
+            </div>
+            
+            <div id="eligibleDiv">
+                <div id="eligibleForm">
+                 
+                    <p><button class="buttonplay button1"><h2><a href="https://degencoinflip.com/goldennomads" target="_blank">Click here to play Coin Flip</a></h2></button></p>
+                  
+                </div>
+                
+            </div>
+        
+                <div id="coinflip">  
+                    
+                    <div id="leaderboardDiv" class="calculation">   
+                        <h1>Coin Flip Leaderboard</h1>                   
+                        <div class="leaderboardButtons">
+                            <button id="dcfgettopGains" class="active">Top Gains</button>
+                            <button id="dcfgettopVolume">Volume</button>
+                            <button id="dcfgetTopFlips">Flips</button>
+                            <button id="dcfgetTopWinStreak">Win Streak</button>
+                        </div>
+                        <div id="dcfleaderboard">
+                            
+                        </div>
+                    </div>
+                    <br>
+                </div>
+
+                <div id="dozerEligiblediv">
+                    <div id="dozerEligibleForm">
+                 
+                        <p><button class="buttonplay button1"><h2><a href="https://crash.degencoinflip.com" target="_blank">Click to play Crash</a></h2></button></p>
+                        
+                   
+                    </div>
+                    
+                </div>   
+             
+                <div id="dozer">          
+                    <div id="leaderboardDiv" class="calculation">
+                        <h1>Crash Leaderboard</h1>
+                        <div class="leaderboardButtons">
+                            <button id="dozertopGains" class="active">Top Gains</button>
+                            <button id="dozergettopVolume">Volume</button>
+                            <button id="dozerCoins">Coins Dropped</button>
+                        </div>
+                        <div id="dozerleaderboard">
+                            
+                        </div>
+                        
+                    </div>
+                    <br>
+
+                 </div>
+             
+                 
+                 <div id="stats">
+                    
+                    <div id="total" class="calculation">
+                        <h2>TOTAL Payouts</h2>
+                        <div class="stats">
+                            <div class="stat">
+                                <p>Sol in Fee Wallet: </p>
+                                <p id="totalRevenue">0.0000 Sol</p>
+                            </div>
+                            <div class="stat">
+                                <p>Payout per cat: </p>
+                                <p id="totalPayout">0.0000 Sol</p>
+                            </div>
+                            <div class="stat">
+                                <p>TOTAL Payout Cats Owned: </p>
+                                <p id="totalCat" class="underline">0.0000 Sol</p>
+                            </div>
+                        </div>
+                    </div> 
+    
+                   <div id="dcf" class="calculation">
+                        
+                        <h2>Coin Flip Payouts</h2>
+                        <div class="stats">
+                            <div class="stat">
+                                <p>Sol in Fee Wallet: </p>
+                                <p id="dcfRevenue">0.0000 Sol</p>
+                            </div>
+                            <div class="stat">
+                                <p>Payout per cat: </p>
+                                <p id="dcfPayout">0.0000 Sol</p>
+                            </div>
+                            <div class="stat">
+                                <p>TOTAL Payout Cats Owned: </p>
+                                <p id="dcfCat" class="underline">0.0000 Sol</p>
+                            </div>
+                        </div>
+                    </div>
+            
+                    <div id="dcc" class="calculation">
+                        <h2>Crash Payouts</h2>
+                        <div class="stats">
+                            <div class="stat">
+                                <p>Sol in Fee Wallet: </p>
+                                <p id="dccRevenue">0.0000 Sol</p>
+                            </div>
+                            <div class="stat">
+                                <p>Payout per cat: </p>
+                                <p id="dccPayout">0.0000 Sol</p>
+                            </div>
+                            <div class="stat">
+                                <p>TOTAL Payout Cats Owned: </p>
+                                <p id="dccCat" class="underline">0.0000 Sol</p>  
+                            </div>                
+                        </div> 
+                    </div> 
+                    <div id="ds" class="calculation">
+                        <h2>Degen Spin Payouts</h2>
+                        <div class="stats">
+                            <div class="stat">
+                                <p>Sol in Fee Wallet: </p>
+                                <p id="dsRevenue">0.0000 Sol</p>
+                            </div>
+                            <div class="stat">
+                                <p>Payout per cat: </p>
+                                <p id="dsPayout">0.0000 Sol</p>
+                            </div>
+                            <div class="stat">
+                                <p>TOTAL Payout Cats Owned: </p>
+                                <p id="dsCat" class="underline">0.0000 Sol</p>  
+                            </div>                
+                        </div> 
+                    </div> 
+                    <div id="ds" class="calculation">
+                        <h2>Insurance Payouts</h2>
+                        <div class="stats">
+                            <div class="stat">
+                                <p>Sol in Fee Wallet: </p>
+                                <p id="insuranceRevenue">0.0000 Sol</p>
+                            </div>
+                            <div class="stat">
+                                <p>Payout per cat: </p>
+                                <p id="insurancePayout">0.0000 Sol</p>
+                            </div>
+                            <div class="stat">
+                                <p>TOTAL Payout Cats Owned: </p>
+                                <p id="insuranceCat" class="underline">0.0000 Sol</p>  
+                            </div>                
+                        </div> 
+                    </div> 
+                
+                    <div id="countdown">
+                       
+                    </div>
+                
+                </div>    
+ 
+                
+                    <div id="catsOwnedDiv">
+                        <br>
+                        <div><label for="catsOwned">Amount of Cats owned: </label>
+                            <input type="number" name="catsOwned" id="catsOwned">
+                        </div>
+                        <div id="floor">
+                            <p>Your total cat value is <u>0.00 Sol</u> at <u>0.00 Sol</u> per cat</p>
+                        </div>
+                        
+                    </div>
+                    
+                    
+             
+    </div>
+   
+        <script src="index.js" type="module"></script>
+    </body>
+
+<!-- Mirrored from goldennomaddash.netlify.app/ by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 07 Aug 2023 12:49:35 GMT -->
+</html>
