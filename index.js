@@ -72,53 +72,6 @@ function reset(){
     return test3
   }
 
-function getDCF() {
-    fetch("http://localhost:10000/dcf")
-        .then(res => res.json())
-        .then(data => {
-            // Ensure data contains balance1 and balance2
-            if (data.balance1 !== undefined && data.balance2 !== undefined) {
-                const balance1 = data.balance1;
-                const balance2 = data.balance2;
-
-                // Perform calculations
-                const dcfRevenue = (((balance1 / 1000000000) + (balance2 / 1000000000)) * 0.595);
-                const dcfPayout = (dcfRevenue * 0.6) / 20000;
-                const catsOwned = parseFloat(localStorage.getItem("catsOwned")) || 0; // Default to 0 if not set
-                const dcfCat = dcfPayout * catsOwned;
-
-                // Update HTML elements
-                dcfRevenueHTML.textContent = `${dcfRevenue.toFixed(4)} Sol`;
-                dcfPayoutHTML.textContent = `${dcfPayout.toFixed(4)} Sol`;
-                dcfCatHTML.textContent = `${dcfCat.toFixed(4)} Sol`;
-            } else {
-                console.error("Invalid data received from server");
-            }
-        })
-        .catch(error => {
-            console.error("Error fetching DCF data:", error);
-        });
-}
-
-
-/*function getDCD() {
-    fetch("https://api.helius.xyz/v0/addresses/DbS2HRdTovF1VQjHxPXYMmp9Kov7V7e2MkQYGWe7xXW3/balances?api-key=eff3cc4b-32f2-47d0-b6a0-ae82a5ba3159")
-        .then(res => res.json())
-        .then(data => {
-
-            fetch("https://api.helius.xyz/v0/addresses/dcdVRDNr98aGj3XuYYuoy9RR5z17KPgL3JJaCvJ1d3o/balances?api-key=eff3cc4b-32f2-47d0-b6a0-ae82a5ba3159")
-            .then(res => res.json())
-            .then(secondData => { 
-                dcdRevenue = (((data.nativeBalance/1000000000)+(secondData.nativeBalance/1000000000)) * 0.7)
-                dcdPayout = (dcdRevenue * 0.44) / 20000
-                dcdCat = dcdPayout * localStorage.getItem("catsOwned")
-    
-                dcdRevenueHTML.textContent = `${dcdRevenue.toFixed(4)} Sol`
-                dcdPayoutHTML.textContent = `${dcdPayout.toFixed(4)} Sol`
-                dcdCatHTML.textContent = `${dcdCat.toFixed(4)} Sol`
-            })
-        })
-}*/
 
 function getDCC() {
     fetch("http://localhost:10000/dcc")
@@ -149,67 +102,13 @@ function getDCC() {
 }
 
 
-function getDS() {
-    fetch("http://localhost:10000/ds")
-        .then(res => res.json())
-        .then(data => {
-            // Ensure data contains balance1 and balance2
-            if (data.balance1 !== undefined && data.balance2 !== undefined) {
-                const balance1 = data.balance1;
-                const balance2 = data.balance2;
 
-                // Perform calculations
-                const dsRevenue = (((balance1 / 1000000000) + (balance2 / 1000000000)) * 0.7);
-                const dsPayout = (dsRevenue * 0.25) / 20000;
-                const catsOwned = parseFloat(localStorage.getItem("catsOwned")) || 0; // Default to 0 if not set
-                const dsCat = dsPayout * catsOwned;
-
-                // Update HTML elements
-                dsRevenueHTML.textContent = `${dsRevenue.toFixed(4)} Sol`;
-                dsPayoutHTML.textContent = `${dsPayout.toFixed(4)} Sol`;
-                dsCatHTML.textContent = `${dsCat.toFixed(4)} Sol`;
-            } else {
-                console.error("Invalid data received from server");
-            }
-        })
-        .catch(error => {
-            console.error("Error fetching DS data:", error);
-        });
-}
-
-
-function getInsurance() {
-    fetch("http://localhost:10000/insurance")
-        .then(res => res.json())
-        .then(data => {
-            // Ensure data contains balance
-            if (data.balance !== undefined) {
-                const balance = data.balance;
-
-                // Perform calculations
-                const insuranceRevenue = (balance / 1000000000 * 0.7);
-                const insurancePayout = (insuranceRevenue * 0.25) / 20000;
-                const catsOwned = parseFloat(localStorage.getItem("catsOwned")) || 0; // Default to 0 if not set
-                const insuranceCat = insurancePayout * catsOwned;
-
-                // Update HTML elements
-                insuranceRevenueHTML.textContent = `${insuranceRevenue.toFixed(4)} Sol`;
-                insurancePayoutHTML.textContent = `${insurancePayout.toFixed(4)} Sol`;
-                insuranceCatHTML.textContent = `${insuranceCat.toFixed(4)} Sol`;
-            } else {
-                console.error("Invalid data received from server");
-            }
-        })
-        .catch(error => {
-            console.error("Error fetching insurance data:", error);
-        });
-}
 
 
 
 function getTOTAL() {
-    totalRevenue = dccRevenue + dcfRevenue + dsRevenue + insuranceRevenue
-    totalPayout = dccPayout + dcfPayout + dsPayout + insurancePayout
+    totalRevenue = dccRevenue 
+    totalPayout = dccPayout 
     totalCat = totalPayout * localStorage.getItem("catsOwned")
 
     totalRevenueHTML.textContent = `${totalRevenue.toFixed(4)} Sol`
