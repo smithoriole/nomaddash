@@ -12,6 +12,27 @@ let dcdRevenueHTML = document.getElementById("dcdRevenue")
 let dcdPayoutHTML = document.getElementById("dcdPayout")
 let dcdCatHTML = document.getElementById("dcdCat")
 
+let dccRevenue
+let dccPayout
+let dccCat
+let dccRevenueHTML = document.getElementById("dccRevenue")
+let dccPayoutHTML = document.getElementById("dccPayout")
+let dccCatHTML = document.getElementById("dccCat")
+
+let dsRevenue
+let dsPayout
+let dsCat
+let dsRevenueHTML = document.getElementById("dsRevenue")
+let dsPayoutHTML = document.getElementById("dsPayout")
+let dsCatHTML = document.getElementById("dsCat")
+
+let insuranceRevenue
+let insurancePayout
+let insuranceCat
+let insuranceRevenueHTML = document.getElementById("insuranceRevenue")
+let insurancePayoutHTML = document.getElementById("insurancePayout")
+let insuranceCatHTML = document.getElementById("insuranceCat")
+
 let totalRevenue
 let totalPayout
 let totalCat
@@ -30,75 +51,105 @@ let eligibleInput = document.getElementById("eligible")
 let eligibleBtn = document.getElementById("eligibleBtn")
 let eligibleConfirmation = document.getElementById("eligibleConfirmation")
 
+function reset(){
+  let date = new Date()
+  let a = date.getDay()
+  let b = 0
+  let first
+	if(a==4 || a==5 || a==6){
+    		first = (date.getDate() - date.getDay()) +4;
+    }
+	else if(a>0 && a<4){first = (date.getDate() - date.getDay()) -3;
+	}
+    else{
+    		first = (date.getDate() - date.getDay()) -3;
+    }
+    
+    let saturday = new Date(date.setDate(first)).toUTCString()
+    let test = new Date(saturday).toISOString()
+    let test2 = test.substring(0,10)
+    let test3 = `${test2}T00:00:00.000Z`
+    return test3
+  }
+
 function getDCF() {
-    fetch("https://api.helius.xyz/v0/addresses/h2oMkkgUF55mxMFeuUgVYwvEnpV5kRbvHVuDWMKDYFC/balances?api-key=e1c09956-d571-42f5-bcf7-b71c2acb2497")
+    fetch("http://localhost:3000/dcf")
         .then(res => res.json())
         .then(data => {
-            dcfRevenue = data.nativeBalance /1000000000
-            dcfPayout = (dcfRevenue * 0.587) / 20000
-            dcfCat = dcfPayout * localStorage.getItem("catsOwned")
-
-            dcfRevenueHTML.textContent = `${dcfRevenue.toFixed(2)} Sol`
-            dcfPayoutHTML.textContent = `${dcfPayout.toFixed(2)} Sol`
-            dcfCatHTML.textContent = `${dcfCat.toFixed(2)} Sol`
-        })
+            dcfRevenueHTML.textContent = `${data.revenue.toFixed(4)} Sol`;
+            dcfPayoutHTML.textContent = `${data.payout.toFixed(4)} Sol`;
+            dcfCatHTML.textContent = `${data.cat.toFixed(4)} Sol`;
+        });
 }
 
-/*
-function getDCD() {
-    fetch("https://api.helius.xyz/v0/addresses/3biJV4VbV6zJSV8mqUzx76YM8bgMeB5PtuFv6PQHzP1d/balances?api-key=e1c09956-d571-42f5-bcf7-b71c2acb2497")
+/*function getDCD() {
+    fetch("https://api.helius.xyz/v0/addresses/DbS2HRdTovF1VQjHxPXYMmp9Kov7V7e2MkQYGWe7xXW3/balances?api-key=eff3cc4b-32f2-47d0-b6a0-ae82a5ba3159")
         .then(res => res.json())
         .then(data => {
-            fetch("https://api.helius.xyz/v0/addresses/Fii9oCjWSKty9yM8VJdd8D2o2zX5MTHkEop3rVyEFc4J/balances?api-key=e1c09956-d571-42f5-bcf7-b71c2acb2497")
-                .then(res2 => res2.json())
-                .then(data2 => {
-                    dcdRevenue = (data.lamports / 1000000000) + (data2.lamports / 1000000000)
-                    dcdPayout = (dcdRevenue * 0.587) / 20000
-                    dcdCat = dcdPayout * localStorage.getItem("catsOwned")
 
-                    dcdRevenueHTML.textContent = `${dcdRevenue.toFixed(2)} Sol`
-                    dcdPayoutHTML.textContent = `${dcdPayout.toFixed(2)} Sol`
-                    dcdCatHTML.textContent = `${dcdCat.toFixed(2)} Sol`
-                })
+            fetch("https://api.helius.xyz/v0/addresses/dcdVRDNr98aGj3XuYYuoy9RR5z17KPgL3JJaCvJ1d3o/balances?api-key=eff3cc4b-32f2-47d0-b6a0-ae82a5ba3159")
+            .then(res => res.json())
+            .then(secondData => { 
+                dcdRevenue = (((data.nativeBalance/1000000000)+(secondData.nativeBalance/1000000000)) * 0.7)
+                dcdPayout = (dcdRevenue * 0.44) / 20000
+                dcdCat = dcdPayout * localStorage.getItem("catsOwned")
+    
+                dcdRevenueHTML.textContent = `${dcdRevenue.toFixed(4)} Sol`
+                dcdPayoutHTML.textContent = `${dcdPayout.toFixed(4)} Sol`
+                dcdCatHTML.textContent = `${dcdCat.toFixed(4)} Sol`
+            })
         })
-}
-*/
+}*/
 
-function getDCD() {
-    fetch("https://api.helius.xyz/v0/addresses/DbS2HRdTovF1VQjHxPXYMmp9Kov7V7e2MkQYGWe7xXW3/balances?api-key=e1c09956-d571-42f5-bcf7-b71c2acb2497")
+function getDCC() {
+    fetch("http://localhost:3000/dcc")
         .then(res => res.json())
         .then(data => {
-            dcdRevenue = (data.nativeBalance / 1000000000)
-            dcdPayout = (dcdRevenue * 0.587) / 20000
-            dcdCat = dcdPayout * localStorage.getItem("catsOwned")
-
-            dcdRevenueHTML.textContent = `${dcdRevenue.toFixed(2)} Sol`
-            dcdPayoutHTML.textContent = `${dcdPayout.toFixed(2)} Sol`
-            dcdCatHTML.textContent = `${dcdCat.toFixed(2)} Sol`
-        })
+            dccRevenueHTML.textContent = `${data.revenue.toFixed(4)} Sol`;
+            dccPayoutHTML.textContent = `${data.payout.toFixed(4)} Sol`;
+            dccCatHTML.textContent = `${data.cat.toFixed(4)} Sol`;
+        });
 }
+
+function getDS() {
+    fetch("http://localhost:3000/ds")
+        .then(res => res.json())
+        .then(data => {
+            dsRevenueHTML.textContent = `${data.revenue.toFixed(4)} Sol`;
+            dsPayoutHTML.textContent = `${data.payout.toFixed(4)} Sol`;
+            dsCatHTML.textContent = `${data.cat.toFixed(4)} Sol`;
+        });
+}
+
+function getinsurance() {
+    fetch("http://localhost:3000/insurance")
+        .then(res => res.json())
+        .then(data => {
+            insuranceRevenueHTML.textContent = `${data.revenue.toFixed(4)} Sol`;
+            insurancePayoutHTML.textContent = `${data.payout.toFixed(4)} Sol`;
+            insuranceCatHTML.textContent = `${data.cat.toFixed(4)} Sol`;
+        });
+}
+
 
 function getTOTAL() {
-    totalRevenue = dcdRevenue + dcfRevenue
-    totalPayout = dcdPayout + dcfPayout
+    totalRevenue = dccRevenue + dcfRevenue + dsRevenue + insuranceRevenue
+    totalPayout = dccPayout + dcfPayout + dsPayout + insurancePayout
     totalCat = totalPayout * localStorage.getItem("catsOwned")
 
-    totalRevenueHTML.textContent = `${totalRevenue.toFixed(2)} Sol`
-    totalPayoutHTML.textContent = `${totalPayout.toFixed(2)} Sol`
-    totalCatHTML.textContent = `${totalCat.toFixed(2)} Sol`
+    totalRevenueHTML.textContent = `${totalRevenue.toFixed(4)} Sol`
+    totalPayoutHTML.textContent = `${totalPayout.toFixed(4)} Sol`
+    totalCatHTML.textContent = `${totalCat.toFixed(4)} Sol`
 }
 
 function getFLOOR() {
-    fetch("https://sharky.fi/api/floor-prices", {
+    fetch("https://cors-get-proxy.sirjosh.workers.dev/?url=https://api-mainnet.magiceden.io/rpc/getCollectionEscrowStats/degenfatcats?edge_cache=true", {
         method: 'GET',
         redirect: 'follow',
     })
         .then(res => res.json())
         .then(data => {
-            const degenFatCats = data.find(item => item.name === "Degen Fat Cats");
-            const floorPriceSol = degenFatCats.floorPriceSol;
-//            floorPrice = data.floorPrice / 1000000000
-            floorPrice = floorPriceSol
+            floorPrice = data.results.floorPrice / 1000000000
             totalFloorPrice = floorPrice * localStorage.getItem("catsOwned")
             floor.innerHTML = `<p>Your total cat value is <u>${totalFloorPrice.toFixed(2)} Sol</u> at <u>${floorPrice.toFixed(2)} Sol</u> per cat</p>`
         })
@@ -115,38 +166,94 @@ function jackpot() {
     let test = new Date(saturday).toISOString()
     let test2 = test.substring(0,10)
     let test3 = `${test2}T00:00:00.000Z`
+    fetch(`https://api.helius.xyz/v0/addresses/jpotSBs8opQ4xGDn2xbRQS4eChNG5w4kxEeS1Rx9tyg/balances?api-key=eff3cc4b-32f2-47d0-b6a0-ae82a5ba3159`)
+    .then(res2 => res2.json())
+    .then(data2 => {
+        jackpotTotal = jackpot + (data2.nativeBalance / 1000000000)
+        let NEWJACKPOT = (data2.nativeBalance / 1000000000)
 
-    fetch(`https://damp-ocean-83908.fly.dev/https://api.degencoinflip.com/v2/dashboard/top-gains?startTime=${test3}&limit=10000&showAll=true&referral=goldennomads`)
+        document.querySelector(".dcfjpot").innerHTML = `                      
+           ${NEWJACKPOT.toFixed(2)}◎
+            
+        `
+    })
+
+    fetch(`https://damp-ocean-83908.fly.dev/https://api.degencoinflip.com/v2/dashboard/top-gains?startTime=${test3}&limit=10000&showAll=true`)
         .then(res => res.json())
         .then(data => {
             for (let item of data.payload.items) {
                 totalVolume += item.total
                 jackpot = ((totalVolume * 0.035) * 0.2428) * 0.05
             }
-            fetch(`https://api.helius.xyz/v0/addresses/jpotSBs8opQ4xGDn2xbRQS4eChNG5w4kxEeS1Rx9tyg/balances?api-key=e1c09956-d571-42f5-bcf7-b71c2acb2497`)
-                .then(res2 => res2.json())
-                .then(data2 => {
-                    jackpotTotal = jackpot + (data2.nativeBalance / 1000000000)
-                    let NEWJACKPOT = (data2.nativeBalance / 1000000000)
 
-                    document.querySelector(".jackpot").innerHTML = `
-                        <h2>${NEWJACKPOT.toFixed(2)} Sol</h2>
-                    `
-                })
         })
 }
+
+function dozerJackpot(){
+
+    fetch(`https://api.helius.xyz/v0/addresses/GRrkVGTegDVz5sszrWtVyhopmyiDwYie2QDaQwKcjVxc/balances?api-key=eff3cc4b-32f2-47d0-b6a0-ae82a5ba3159`)
+    .then(res2 => res2.json())
+    .then(data2 => {
+        //let dozerjackpotTotal = jackpot + (data2.nativeBalance / 1000000000)
+        let dozerJackpot = (data2.nativeBalance / 1000000000)
+        
+
+        document.querySelector(".dozerjpot").innerHTML = `                      
+            ${dozerJackpot.toFixed(2)}◎
+            
+        `
+    })
+
+}
+function miniJackpot(){
+
+    fetch(`https://api.helius.xyz/v0/addresses/EcinyDeHV8Le3nBZZV52tGyrNpePxawBNzQmnUpY1x6m/balances?api-key=eff3cc4b-32f2-47d0-b6a0-ae82a5ba3159`)
+    .then(res2 => res2.json())
+    .then(data2 => {
+        //let dozerjackpotTotal = jackpot + (data2.nativeBalance / 1000000000)
+        let miniJackpot = (data2.nativeBalance / 1000000000)
+        
+
+        document.querySelector(".minijpot").innerHTML = `                      
+            ${miniJackpot.toFixed(2)}◎
+            
+        `
+    })
+
+}
+function charity(){
+
+    fetch(`https://api.helius.xyz/v0/addresses/7X5mDEAtJwDHzgA8ztJDbRDJyhePHNftx19AwNoU4QqZ/balances?api-key=eff3cc4b-32f2-47d0-b6a0-ae82a5ba3159`)
+    .then(res2 => res2.json())
+    .then(data2 => {
+        //let dozerjackpotTotal = jackpot + (data2.nativeBalance / 1000000000)
+        let charity = (data2.nativeBalance / 1000000000)
+        
+
+        document.querySelector(".charity").innerHTML = `                      
+            ${charity.toFixed(2)}◎
+            
+        `
+    })
+
+}
+
+
 
 catsOwned.value = localStorage.getItem("catsOwned")
 
 catsOwnedDiv.addEventListener("change", function(e) {
     localStorage.setItem("catsOwned", e.target.value)
     getDCF()
-    getDCD()
+    getDCC()
+    /*getDCD()*/
+    getDS()
+    getinsurance()
     getFLOOR()
     setTimeout(getTOTAL, 1500)
-})
+}) 
 
-eligibleBtn.addEventListener("click", function() {
+/* eligibleBtn.addEventListener("click", function() {
     let wallet = eligibleInput.value
     if (eligibleInput.value.length >= 32 && eligibleInput.value.length <= 44) {
         fetch(`https://damp-ocean-83908.fly.dev/https://jp7ylm6bad.execute-api.us-east-2.amazonaws.com/prod/wallets/${wallet}/nonce?x=gn&referral=goldennomads`)
@@ -170,12 +277,18 @@ eligibleBtn.addEventListener("click", function() {
         `
         eligibleInput.value = ""
     }
-}) 
+}) */
 
 function render() {
+    miniJackpot()
     jackpot()
+    dozerJackpot()
+    charity()
     getDCF()
-    getDCD()
+    /*getDCD()*/
+    getDCC()
+    getDS()
+    getinsurance()
     setTimeout(getTOTAL, 1500)
     getFLOOR()
     setTimeout(render, 10000)
@@ -183,39 +296,30 @@ function render() {
 
 render()
 
-let leaderboard = document.getElementById("leaderboard")
+let dcfleaderboard = document.getElementById("dcfleaderboard")
+let dozerleaderboard = document.getElementById("dozerleaderboard")
 
 function compareNumbers(a, b) {
     return a - b;
   }
   
-let leaderboardHTML = ``
+let dcfleaderboardHTML = ``
+let dozerleaderboardHTML = ``
 let array = []
 
 // GAIN
-function getTopGains() {
+function dcfgetTopGains() {
 
-    let date = new Date()
-    console.log(date)
-    let first = date.getDate() - (date.getDay() + 1)
-    console.log(first)
-    let saturday = new Date(date.setDate(first)).toUTCString()
-    console.log(saturday)
-    let test = new Date(saturday).toISOString()
-    console.log(test)
-    let test2 = test.substring(0,10)
-    console.log(test2)
-    let test3 = `${test2}T00:00:00.000Z`
-    console.log(test3)
+    let test3 = reset();
 
-    fetch(`https://damp-ocean-83908.fly.dev/https://api.degencoinflip.com/v2/dashboard/top-gains?startTime=${test3}&limit=10000&showAll=true&referral=goldennomads`)
+    fetch(`https://damp-ocean-83908.fly.dev/https://api.degencoinflip.com/v2/dashboard/top-gains?startTime=${test3}&limit=10000&showAll=true`)
     .then(res => res.json())
     .then(data => {
-        console.log(data.payload)
-        leaderboardHTML = ``
-        for (let i = 0; i < 10; i++) {
+        let count = data.payload.items.length;
+        dcfleaderboardHTML = ``
+        for (let i = 0; i < 10 && i < count; i++) {
             if (data.payload.items[i].nickname) {
-                leaderboardHTML += `
+                dcfleaderboardHTML += `
                 <div class="leaderboardItem">
                     <p class="leaderboardPosition">${i+1}.</p>
                     <div class="leaderboardItems">
@@ -225,7 +329,7 @@ function getTopGains() {
                 </div>
             `
             } else {
-                leaderboardHTML += `
+                dcfleaderboardHTML += `
                 <div class="leaderboardItem">
                     <p class="leaderboardPosition">${i+1}.</p>
                     <div class="leaderboardItems">
@@ -236,36 +340,252 @@ function getTopGains() {
             `
             }
         }
-        leaderboard.innerHTML = leaderboardHTML
+        dcfleaderboard.innerHTML = dcfleaderboardHTML
     })
 
 }
+function dozergetTopGains() {
+
+    let date = new Date();
+    let start = date.getDate() - (date.getDay() +2);
+    let startString = new Date(date.setDate(start)).toUTCString();
+    let satString = new Date(startString).toISOString();
+    let startDate = reset();
+
+
+    let today = new Date();
+    today.setDate(today.getDate() + 1);
+    let tomorrow = today.toISOString().split('T')[0];
+
+    let apiLink = "https://damp-ocean-83908.fly.dev/https://api.degencoindozer.com/v1/rankings?startTime="+startDate+"&dao=goldennomads&endTime="+tomorrow;
+    
+
+    fetch(apiLink)
+        .then(res => res.json())
+        .then(data => {
+       
+        dozerleaderboardHTML = ``
+        array = []
+        let lamport = 1000000000
+        for (let payload of data.payload) {
+            array.push({gains: payload.gains/lamport, wallet: payload.owner})         
+        }
+        array.sort((a, b) => b.gains - a.gains)
+        let count = data.payload.length;
+        
+
+        for(let i = 0; i < count && i < 10 ; i++){
+            let profit = array[i].gains;
+            let owner = array[i].wallet;
+
+            if(owner){  
+                                            
+                        dozerleaderboardHTML += `
+                        <div class="leaderboardItem">
+                            <p class="leaderboardPosition">${i+1}.</p>
+                            <div class="leaderboardItems">
+                                <p class="dozerleaderboardWallet"></p>
+                                <p class="leaderboardGains">${profit.toFixed(2)}</p>
+                            </div>
+                        </div>
+                        `
+            }
+            else{
+                        dozerleaderboardHTML += `
+                            <div class="leaderboardItem">
+                                <p class="leaderboardPosition">${i+1}.</p>
+                                <div class="leaderboardItems">
+                                    <p class="dozerleaderboardWallet"><a href="https://solscan.io/account/${owner}" target="_blank">${owner}</a></p>
+                                    <p class="leaderboardGains">${profit.toFixed(2)}</p>
+                                </div>
+                            </div>
+                        `
+            }
+
+
+            getNickname(owner).then (function(result) {
+                let nickname = result;                
+                var elements = document.getElementsByClassName('dozerleaderboardWallet');  
+                elements[i].innerHTML = `<a href="https://solscan.io/account/${owner}" target="_blank">${nickname}</a>`
+                          
+            })                     
+        }       
+        dozerleaderboard.innerHTML = dozerleaderboardHTML
+        
+        })   
+    }
+
+    function dozergetTopVolume() {
+
+        let date = new Date();
+        let start = date.getDate() - (date.getDay() +2);
+        let startString = new Date(date.setDate(start)).toUTCString();
+        let satString = new Date(startString).toISOString();
+        let startDate = reset();
+    
+    
+        let today = new Date();
+        today.setDate(today.getDate() + 1);
+        let tomorrow = today.toISOString().split('T')[0];
+    
+        let apiLink = "https://damp-ocean-83908.fly.dev/https://api.degencoindozer.com/v1/rankings?startTime="+startDate+"&dao=goldennomads&endTime="+tomorrow;
+        
+    
+        fetch(apiLink)
+            .then(res => res.json())
+            .then(data => {
+           
+            dozerleaderboardHTML = ``
+            array = []
+            let lamport = 1000000000
+            for (let payload of data.payload) {
+                array.push({volume: payload.volume/lamport, wallet: payload.owner})         
+            }
+            array.sort((a, b) => b.volume - a.volume)
+            let count = data.payload.length;
+            
+    
+            for(let i = 0; i < count && i < 10 ; i++){
+                let volume = array[i].volume;
+                let owner = array[i].wallet;
+    
+                if(owner){  
+                                                
+                            dozerleaderboardHTML += `
+                            <div class="leaderboardItem">
+                                <p class="leaderboardPosition">${i+1}.</p>
+                                <div class="leaderboardItems">
+                                    <p class="dozerleaderboardWallet"></p>
+                                    <p class="leaderboardGains">${volume.toFixed(2)}</p>
+                                </div>
+                            </div>
+                            `
+                }
+                else{
+                                dozerleaderboardHTML += `
+                                <div class="leaderboardItem">
+                                    <p class="leaderboardPosition">${i+1}.</p>
+                                    <div class="leaderboardItems">
+                                        <p class="dozerleaderboardWallet"><a href="https://solscan.io/account/${owner}" target="_blank">${owner}</a></p>
+                                        <p class="leaderboardGains">${profit.toFixed(2)}</p>
+                                    </div>
+                                </div>
+                            `
+                }
+    
+    
+                getNickname(owner).then (function(result) {
+                    let nickname = result;                
+                    var elements = document.getElementsByClassName('dozerleaderboardWallet');  
+                    elements[i].innerHTML = `<a href="https://solscan.io/account/${owner}" target="_blank">${nickname}</a>`
+                })                     
+            }       
+            dozerleaderboard.innerHTML = dozerleaderboardHTML
+            
+            })   
+        }
+
+        function dozerCoins() {
+
+            let date = new Date();
+            let start = date.getDate() - (date.getDay() +2);
+            let startString = new Date(date.setDate(start)).toUTCString();
+            let satString = new Date(startString).toISOString();
+            let startDate = reset();
+        
+        
+            let today = new Date();
+            today.setDate(today.getDate() + 1);
+            let tomorrow = today.toISOString().split('T')[0];
+        
+            let apiLink = "https://damp-ocean-83908.fly.dev/https://api.degencoindozer.com/v1/rankings?startTime="+startDate+"&dao=goldennomads&endTime="+tomorrow;
+            
+        
+            fetch(apiLink)
+                .then(res => res.json())
+                .then(data => {
+               
+                dozerleaderboardHTML = ``
+                array = []
+                let lamport = 1000000000
+                for (let payload of data.payload) {
+                    array.push({coins: payload.coins, wallet: payload.owner})         
+                }
+                array.sort((a, b) => b.coins - a.coins)
+                let count = data.payload.length;
+                
+        
+                for(let i = 0; i < count && i < 10 ; i++){
+                    let coins = array[i].coins;
+                    let owner = array[i].wallet;
+        
+                    if(owner){  
+                                                    
+                                dozerleaderboardHTML += `
+                                <div class="leaderboardItem">
+                                    <p class="leaderboardPosition">${i+1}.</p>
+                                    <div class="leaderboardItems">
+                                        <p class="dozerleaderboardWallet"></p>
+                                        <p class="leaderboardGains">${coins}</p>
+                                    </div>
+                                </div>
+                                `
+                    }
+                    else{
+                                    dozerleaderboardHTML += `
+                                    <div class="leaderboardItem">
+                                        <p class="leaderboardPosition">${i+1}.</p>
+                                        <div class="leaderboardItems">
+                                            <p class="dozerleaderboardWallet"><a href="https://solscan.io/account/${owner}" target="_blank">${owner}</a></p>
+                                            <p class="leaderboardGains">${profit.toFixed(2)}</p>
+                                        </div>
+                                    </div>
+                                `
+                    }
+        
+        
+                    getNickname(owner).then (function(result) {
+                        let nickname = result;                
+                        var elements = document.getElementsByClassName('dozerleaderboardWallet');  
+                        elements[i].innerHTML = `<a href="https://solscan.io/account/${owner}" target="_blank">${nickname}</a>`
+                                  
+                    })                     
+                }       
+                dozerleaderboard.innerHTML = dozerleaderboardHTML
+                
+                })   
+            }
+        
+    async function getNickname(owner){   
+        let url="https://damp-ocean-83908.fly.dev/https://api.degenpersonas.com/v1/profiles/"
+     
+        const res = await fetch(url + owner)
+        const data = await res.json()
+        let nickname = data.payload.nickname
+        return nickname
+        
+    }
 
 // VOLUME
-function getTopVolume() {
+function dcfgetTopVolume() {
 
-    let date = new Date()
-    let first = date.getDate() - (date.getDay() + 1);
-    let saturday = new Date(date.setDate(first)).toUTCString()
-    let test = new Date(saturday).toISOString()
-    let test2 = test.substring(0,10)
-    let test3 = `${test2}T00:00:00.000Z`
+    let test3 = reset();
 
-    fetch(`https://damp-ocean-83908.fly.dev/https://api.degencoinflip.com/v2/dashboard/top-gains?startTime=${test3}&limit=10000&showAll=true&referral=goldennomads`)
+    fetch(`https://damp-ocean-83908.fly.dev/https://api.degencoinflip.com/v2/dashboard/top-gains?startTime=${test3}&limit=10000&showAll=true`)
     .then(res => res.json())
     .then(data => {
-        leaderboardHTML = ``
+        dcfleaderboardHTML = ``
         array = []
 
         for (let items of data.payload.items) {
             array.push({volume: items.total, wallet: items.walletId, name: items.nickname})
         }
         array.sort((a, b) => b.volume - a.volume)
-        console.log(array)
-
-        for (let i = 0; i < 10; i++) {
+       
+        let count = data.payload.items.length;
+        for (let i = 0; i < 10 && i < count; i++) {
             if (array[i].name) {
-                leaderboardHTML += `
+                dcfleaderboardHTML += `
                 <div class="leaderboardItem">
                     <p class="leaderboardPosition">${i+1}.</p>
                     <div class="leaderboardItems">
@@ -275,47 +595,44 @@ function getTopVolume() {
                 </div>
             `
             } else {
-                leaderboardHTML += `
+                dcfleaderboardHTML += `
                 <div class="leaderboardItem">
                     <p class="leaderboardPosition">${i+1}.</p>
                     <div class="leaderboardItems">
-                        <p class="leaderboardWallet"><a href="https://solscan.io/account/${array[i].wallet}" target="_blank">${array[i].wallet}</a></p>
+                        <p class="leaderboardWallet"><a href="https://solscan.io/account/${array[i].wallet}" target="_blank">${array[i].name}</a></p>
                         <p class="leaderboardGains">${array[i].volume.toFixed(2)}</p>
                     </div>
                 </div>
             `
             }
         }
-        leaderboard.innerHTML = leaderboardHTML
+        dcfleaderboard.innerHTML = dcfleaderboardHTML
     })
 
 }
 
 // FLIP
-function getTopFlips() {
+function dcfgetTopFlips() {
 
-    let date = new Date()
-    let first = date.getDate() - (date.getDay() + 1);
-    let saturday = new Date(date.setDate(first)).toUTCString()
-    let test = new Date(saturday).toISOString()
-    let test2 = test.substring(0,10)
-    let test3 = `${test2}T00:00:00.000Z`
 
-    fetch(`https://damp-ocean-83908.fly.dev/https://api.degencoinflip.com/v2/dashboard/top-gains?startTime=${test3}&limit=10000&showAll=true&referral=goldennomads`)
+    let test3 = reset();
+
+    fetch(`https://damp-ocean-83908.fly.dev/https://api.degencoinflip.com/v2/dashboard/top-gains?startTime=${test3}&limit=10000&showAll=true`)
     .then(res => res.json())
     .then(data => {
-        leaderboardHTML = ``
+        dcfleaderboardHTML = ``
         array = []
 
         for (let items of data.payload.items) {
             array.push({flips: items.totalFlips, wallet: items.walletId, name: items.nickname})
         }
         array.sort((a, b) => b.flips - a.flips)
-        console.log(array)
+      
 
-        for (let i = 0; i < 10; i++) {
+        let count = data.payload.items.length;
+        for (let i = 0; i < 10 && i < count; i++) {
             if (array[i].name) {
-                leaderboardHTML += `
+                dcfleaderboardHTML += `
                 <div class="leaderboardItem">
                     <p class="leaderboardPosition">${i+1}.</p>
                     <div class="leaderboardItems">
@@ -325,7 +642,7 @@ function getTopFlips() {
                 </div>
             `
             } else {
-                leaderboardHTML += `
+                dcfleaderboardHTML += `
                 <div class="leaderboardItem">
                     <p class="leaderboardPosition">${i+1}.</p>
                     <div class="leaderboardItems">
@@ -336,36 +653,33 @@ function getTopFlips() {
             `
             }
         }
-        leaderboard.innerHTML = leaderboardHTML
+        dcfleaderboard.innerHTML = dcfleaderboardHTML
+        
     })
 
 }
 
 // WIN STREAK
-function getTopWinStreak() {
+function dcfgetTopWinStreak() {
 
-    let date = new Date()
-    let first = date.getDate() - (date.getDay() + 1);
-    let saturday = new Date(date.setDate(first)).toUTCString()
-    let test = new Date(saturday).toISOString()
-    let test2 = test.substring(0,10)
-    let test3 = `${test2}T00:00:00.000Z`
 
-    fetch(`https://damp-ocean-83908.fly.dev/https://api.degencoinflip.com/v2/dashboard/top-gains?startTime=${test3}&limit=10000&showAll=true&referral=goldennomads`)
+    let test3 = reset();
+
+    fetch(`https://damp-ocean-83908.fly.dev/https://api.degencoinflip.com/v2/dashboard/top-gains?startTime=${test3}&limit=10000&showAll=true`)
     .then(res => res.json())
     .then(data => {
-        leaderboardHTML = ``
+        dcfleaderboardHTML = ``
         array = []
 
         for (let items of data.payload.items) {
             array.push({winStreak: items.winStreak, wallet: items.walletId, name: items.nickname})
         }
         array.sort((a, b) => b.winStreak - a.winStreak)
-        console.log(array)
 
-        for (let i = 0; i < 10; i++) {
+        let count = data.payload.items.length;
+        for (let i = 0; i < 10 && i < count; i++) {
             if (array[i].name) {
-                leaderboardHTML += `
+                dcfleaderboardHTML += `
                 <div class="leaderboardItem">
                     <p class="leaderboardPosition">${i+1}.</p>
                     <div class="leaderboardItems">
@@ -375,7 +689,7 @@ function getTopWinStreak() {
                 </div>
             `
             } else {
-                leaderboardHTML += `
+                dcfleaderboardHTML += `
                 <div class="leaderboardItem">
                     <p class="leaderboardPosition">${i+1}.</p>
                     <div class="leaderboardItems">
@@ -386,42 +700,190 @@ function getTopWinStreak() {
             `
             }
         }
-        leaderboard.innerHTML = leaderboardHTML
+        dcfleaderboard.innerHTML = dcfleaderboardHTML
     })
 
 }
 
 // DEFAULT
-getTopGains()
+dcfgetTopGains()
+dozergetTopGains()
 
 // CLEAR CLASSES
-function clearClasses() {
-    document.getElementById("topGains").classList.remove("active")
-    document.getElementById("topVolume").classList.remove("active")
-    document.getElementById("topFlips").classList.remove("active")
-    document.getElementById("topWinStreak").classList.remove("active")
+function dcfclearClasses() {
+    document.getElementById("dcfgettopGains").classList.remove("active")
+    document.getElementById("dcfgettopVolume").classList.remove("active")
+    document.getElementById("dcfgetTopFlips").classList.remove("active")
+    document.getElementById("dcfgetTopWinStreak").classList.remove("active")
+}
+function dozerclearClasses(){
+    document.getElementById("dozertopGains").classList.remove("active")
+    document.getElementById("dozergettopVolume").classList.remove("active")
+    document.getElementById("dozerCoins").classList.remove("active")
 }
 
 // CLICK
 document.addEventListener("click", function(e) {
-    if (e.target.id === "topGains") {
-        getTopGains()
-        clearClasses()
-        document.getElementById("topGains").classList.add("active")
+    if (e.target.id === "dcfgettopGains") {
+        dcfgetTopGains()
+        dcfclearClasses()
+        document.getElementById("dcfgettopGains").classList.add("active")
     }
-    if (e.target.id === "topVolume") {
-        getTopVolume()
-        clearClasses()
-        document.getElementById("topVolume").classList.add("active")
+    if (e.target.id === "dcfgettopVolume") {
+        dcfgetTopVolume()
+        dcfclearClasses()
+        document.getElementById("dcfgettopVolume").classList.add("active")
     }
-    if (e.target.id === "topFlips") {
-        getTopFlips()
-        clearClasses()
-        document.getElementById("topFlips").classList.add("active")
+    if (e.target.id === "dcfgetTopFlips") {
+        dcfgetTopFlips()
+        dcfclearClasses()
+        document.getElementById("dcfgetTopFlips").classList.add("active")
     }
-    if (e.target.id === "topWinStreak") {
-        getTopWinStreak()
-        clearClasses()
-        document.getElementById("topWinStreak").classList.add("active")
+    if (e.target.id === "dcfgetTopWinStreak") {
+        dcfgetTopWinStreak()
+        dcfclearClasses()
+        document.getElementById("dcfgetTopWinStreak").classList.add("active")
     }
 })
+
+document.addEventListener("click", function(e) {
+    if (e.target.id === "dozertopGains") {
+        dozergetTopGains()
+        dozerclearClasses()
+        document.getElementById("dozertopGains").classList.add("active")
+    }
+    if (e.target.id === "dozergettopVolume") {
+        dozergetTopVolume()
+        dozerclearClasses()
+        document.getElementById("dozergettopVolume").classList.add("active")
+    }
+    if (e.target.id === "dozerCoins") {
+        dozerCoins()
+        dozerclearClasses()
+        document.getElementById("dozerCoins").classList.add("active")
+    }
+})
+
+
+
+
+
+
+//dozer dash
+
+// dozer eligibility
+let dozerEligibleInput = document.getElementById("dozerEligible")
+let dozerEligibleBtn = document.getElementById("dozerEligibleBtn")
+let dozerEligibleConfirmation = document.getElementById("dozerEligibleConfirmation")
+
+let date = new Date();
+let start = date.getDate() - (date.getDay() + 1);
+let startString = new Date(date.setDate(start)).toUTCString();
+let satString = new Date(startString).toISOString();
+//let startDate = satString.substring(0,10);
+
+let now = new Date("May 01 2023").getDay();
+let dateholder = new Date();
+let start1 = new Date(dateholder.setDate(now)).toISOString()
+let startDate = start1.substring(0,10)
+
+
+let date2 = new Date();
+let end = date2.getDate() - (date2.getDay() - 6 );
+let endString = new Date(date.setDate(end)).toUTCString();
+let endString2 = new Date(endString).toISOString();
+let endDate = endString2.substring(0,10);
+
+let apiLink = "https://damp-ocean-83908.fly.dev/https://api.degencoindozer.com/v1/rankings?startTime="+startDate+"&dao=goldennomads&endTime="+endDate;
+
+/*dozerEligibleBtn.addEventListener("click", function() {
+    let wallet = dozerEligibleInput.value
+    if (dozerEligibleInput.value.length >= 32 && dozerEligibleInput.value.length <= 44) {
+        fetch(apiLink)
+        .then(res => res.json())
+        .then(data => {
+            array = [];
+            for (let payload of data.payload) {
+                array.push(payload.owner);
+            }
+            if(array.includes(wallet)){
+                dozerEligibleConfirmation.innerHTML = `
+                <p style="color: green">${wallet} is eligible</p>
+                `
+            } else {
+                dozerEligibleConfirmation.innerHTML = `
+                <p style="color: red">${wallet} is not eligible</p>
+                `
+            }
+          
+        })
+        dozerEligibleInput.value = ""
+    } else {
+        dozerEligibleConfirmation.innerHTML = `
+        <p style="color: red">${wallet} is not eligible</p>
+        `
+        dozerEligibleInput.value = ""
+    }
+})*/
+
+
+//countdown
+let date1 = new Date()
+let testlang = date1.getDay();
+
+let first = 0
+if(testlang == 0){
+	first = date1.getDate() - (date1.getDay() -5)
+}
+else{
+	first = date1.getDate() - (date1.getDay() -5)
+}
+let thursday = new Date(date1.setDate(first))
+let th = new Date(thursday).toISOString()
+let test2 = th.substring(0,10)
+
+//var countDownDate = thursday.getTime();
+var countDownDate = new Date(test2).getTime();
+
+
+// Update the count down every 1 second
+var x = setInterval(function() {
+    
+
+    var countDownDate = new Date(test2).getTime();
+  // Get today's date and time
+  var now = new Date().getTime();
+    
+  // Find the distance between now and the count down date
+  var distance = countDownDate - now;
+
+  
+
+    
+  // Time calculations for days, hours, minutes and seconds
+  var days = Math.floor(distance / (1000 * 60 * 60 * 24)).toString();
+  var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)).toString();
+  var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60)).toString();
+  var seconds = Math.floor((distance % (1000 * 60)) / 1000).toString();
+    
+  // Output the result in an element with id="demo"
+  document.getElementById("countdown").innerHTML = "<br><br><a>"+days + " Days " + hours + " Hours "
+  + minutes + " Minutes " + seconds + " Seconds until dashboard reset";
+    
+  // If the count down is over, write some text 
+  if (distance < 0) {
+    clearInterval(x)
+
+    
+    
+  }
+}, 1000);
+
+
+
+
+function pad(num, size) {
+    num = num.toString();
+    while (num.length < size) num = "0" + num;
+    return num;
+}
