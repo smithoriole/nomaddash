@@ -18,7 +18,7 @@ const client = redis.createClient({
 const getAsync = promisify(client.get).bind(client);
 
 // API Key and URL
-const API_KEY = process.env.API_KEY || 'eff3cc4b-32f2-47d0-b6a0-ae82a5ba3159';
+const API_KEY = process.env.API_KEY || '51a10f91-34a9-4ead-9c1f-3afe2a906208';
 const BASE_URL = 'https://api.helius.xyz/v0/addresses/';
 
 // Fetch balances function
