@@ -31,24 +31,24 @@ async function fetchBalances(address) {
 }
 
 // Cache middleware
-async function cache(req, res, next) {
-    const cacheKey = req.originalUrl;
-    const cachedData = await getAsync(cacheKey);
+//async function cache(req, res, next) {
+//    const cacheKey = req.originalUrl;
+//    const cachedData = await getAsync(cacheKey);
+//
+  //  if (cachedData) {
+    //    console.log(`Cache hit for ${cacheKey}`);
+      //  return res.json(JSON.parse(cachedData));
+    //}
 
-    if (cachedData) {
-        console.log(`Cache hit for ${cacheKey}`);
-        return res.json(JSON.parse(cachedData));
-    }
+    //console.log(`Cache miss for ${cacheKey}`);
+    //res.sendResponse = res.json;
+    //res.json = (body) => {
+      //  client.setex(cacheKey, 60, JSON.stringify(body)); // Cache for 60 seconds
+        //res.sendResponse(body);
+    //};
 
-    console.log(`Cache miss for ${cacheKey}`);
-    res.sendResponse = res.json;
-    res.json = (body) => {
-        client.setex(cacheKey, 60, JSON.stringify(body)); // Cache for 60 seconds
-        res.sendResponse(body);
-    };
-
-    next();
-}
+    //next();
+//}
 
 // Routes
 app.get('/dcc', cache, async (req, res) => {
