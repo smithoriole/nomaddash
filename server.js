@@ -32,13 +32,24 @@ async function fetchBalances(address) {
     }
 }
 
-// Logging Middleware
+// Middleware for logging
 app.use((req, res, next) => {
     console.log(`Received ${req.method} request for ${req.originalUrl}`);
     next();
 });
 
-// Routes
+// Test Route
+app.get('/test', async (req, res) => {
+    try {
+        console.log('Testing route...');
+        res.send('Test route is working');
+    } catch (error) {
+        console.error('Error in test route:', error.message);
+        res.status(500).send('Error in test route');
+    }
+});
+
+// DCC Route
 app.get('/dcc', async (req, res) => {
     try {
         console.log('Fetching DCC balances...');
@@ -54,8 +65,6 @@ app.get('/dcc', async (req, res) => {
         res.status(500).send('Error fetching DCC balances');
     }
 });
-
-// Add similar simplified routes for /ds, /insurance, and /dcf
 
 app.listen(port, () => {
     console.log(`Server running at http://localhost:${port}`);
