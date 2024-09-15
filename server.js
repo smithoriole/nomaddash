@@ -52,7 +52,6 @@ function calculateValues(data1, data2, coefficient, payoutFactor) {
 }
 
 // Routes
-
 app.get('/dcc', cache, async (req, res) => {
     try {
         const [balance1, balance2] = await Promise.all([
